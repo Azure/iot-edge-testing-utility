@@ -1,0 +1,35 @@
+{
+  "name": "iot-edge-testing-utility",
+  "version": "0.0.1",
+  "description": "Testing utility for Azure IoT Edge Modules",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint **/*.js",
+    "test": "mocha --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/iot-edge-testing-utility.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Azure/iot-edge-testing-utility/issues"
+  },
+  "homepage": "https://github.com/Azure/iot-edge-testing-utility#readme",
+  "dependencies": {
+    "azure-iot-device": "1.4.0-modules-preview",
+    "azure-iot-device-mqtt": "1.4.0-modules-preview",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "fs-extra": "^5.0.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^4.19.1",
+    "mocha": "^5.1.1",
+    "sinon": "^5.0.7"
+  }
+}
