@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 process.env.NODE_ENV = 'test';
-const utilityModule = require('../utilityModule');
+const utilityModule = require('../src/utilityModule');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 describe('server', () => {
   sinon.stub(utilityModule, 'initModule').callsFake(() => {});
 
-  const server = require('../server');
+  const server = require('../src/server');
 
   describe('/POST message', () => {
     it('it should invoke the sendOutputEvent', (done) => {

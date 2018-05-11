@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN npm install --production
 
-COPY *.js ./
+COPY src/*.js ./
 
 USER node
 
