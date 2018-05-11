@@ -29,14 +29,14 @@ if (filePath) {
         label: labelName
       }
     });
-  } else {
-    winston.loggers.add(printer, {
-      console: {
-        level: 'info',
-        label: labelName
-      }
-    });
   }
+} else {
+  winston.loggers.add(printer, {
+    console: {
+      level: 'info',
+      label: labelName
+    }
+  });
 }
 
 module.exports = {
