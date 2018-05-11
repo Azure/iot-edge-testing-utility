@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Swagger Azure IoT Testing Utility",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "shenwe@microsoft.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/api/v1",
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/messages": {
+      "post": {
+        "tags": [
+          "iot-edge-testing-utility"
+        ],
+        "summary": "Send a message",
+        "description": "",
+        "operationId": "sendMessage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The message sent to specified input channel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "$ref": "#/definitions/ApiResponse"
+          },
+          "404": {
+            "$ref": "#/definitions/ErrResponse"
+          },
+          "500": {
+            "$ref": "#/definitions/ErrResponse"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Message": {
+      "type": "object",
+      "required": [
+        "inputName",
+        "data"
+      ],
+      "properties": {
+        "inputName": {
+          "type": "string",
+          "example": "input1"
+        },
+        "data": {
+          "type": "string",
+          "example": "hello world"
+        },
+        "messageId": {
+          "type": "string",
+          "example": "1"
+        },
+        "correlationId": {
+          "type": "string",
+          "example": "kkk"
+        },
+        "userId": {
+          "type": "string",
+          "example": "usera"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "accepted"
+        }
+      }
+    },
+    "ErrResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "cannot init module"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
