@@ -23,7 +23,7 @@ async function setOptions(optionObj) {
 }
 
 function printInput(inputName, msg) {
-  if (inputName === 'printInput') {
+  if (inputName === 'print') {
     const message = msg.getBytes().toString('utf-8');
     printer.info(message);
   }

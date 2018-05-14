@@ -11,7 +11,7 @@ winston.loggers.add('log', {
   }
 });
 
-const labelName = 'PrintInput';
+const labelName = 'Print';
 const printer = 'printer';
 const filePath = process.env.ModuleOutputFile;
 if (filePath) {
