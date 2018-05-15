@@ -1,4 +1,4 @@
-FROM node:8-slim
+FROM stefanscherer/node-windows:8-nanoserver
 
 WORKDIR /app/
 
@@ -8,10 +8,8 @@ RUN npm install --production
 
 COPY src/*.js ./
 
-USER node
-
 ENV DEBUG_OPTION " "
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "node $DEBUG_OPTION server.js"]
+CMD ["cmd", "/C", "node %DEBUG_OPTION% server.js"]
