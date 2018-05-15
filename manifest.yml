@@ -1,0 +1,13 @@
+image: adashen/iot-edge-testing-utility:0.0.1
+tags: [0.0.1-amd64, 0.0.1-windows-amd64]
+manifests:
+  -
+    image: adashen/iot-edge-testing-utility:0.0.1-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  -
+    image: adashen/iot-edge-testing-utility:0.0.1-windows-amd64
+    platform:
+      architecture: amd64
+      os: windows
