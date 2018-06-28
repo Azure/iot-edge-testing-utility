@@ -6,8 +6,6 @@ const logger = require('./logger').log;
 const http  = require('http');
 const bodyParser = require('body-parser');
 
-utilityModule.initModule();
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,14 +40,26 @@ app.use('*', (err, req, res, next) => {
 });
 
 const server = http.createServer(app);
-const port = process.env.PORT || 3000;
-server.listen(port);
-server.on('listening', () => {
-  if (process.send) {
-    process.send('online');
+const port = process.env['PORT'] || 3000;
+async function startServer() {
+  try {
+    await utilityModule.initModule();
+    server.listen(port);
+    server.on('listening', async () => {
+      if (process.send) {
+        process.send('online');
+      }
+      logger.info(`app listening on ${port}`);
+    });
+  } catch (err) {
+    logger.error(`Initialize module fail: ${err.message}`);
+    process.exit(1);
   }
+}
 
-  logger.info(`app listening on ${port}`);
-});
+process.on('unhandledRejection', (err) => {
+  process.exit(1);
+})
 
+startServer();
 module.exports = server;

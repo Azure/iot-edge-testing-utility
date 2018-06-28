@@ -1,21 +1,38 @@
 'use strict';
 
 var Mqtt = require('azure-iot-device-mqtt').Mqtt;
-var Client = require('azure-iot-device').Client;
+var Client = require('azure-iot-device').ModuleClient;
 var Message = require('azure-iot-device').Message;
-var fse = require('fs-extra');
 var logger = require('./logger').log;
 var printer = require('./logger').printer;
 
 var client = undefined;
 
-async function setOptions(optionObj) {
+async function createClient() {
   return await new Promise((resolve, reject) => {
-    client.setOptions(optionObj, (err) => {
-      if(err) {
-        logger.error(`Could not connect: ${err.message}`);
+    Client.fromEnvironment(Mqtt, (err, client) => {
+      if (err) {
+        logger.error(`Cannot create client: ${err.message}`);
         return reject(new Error(err.toString()));
       } else {
+        return resolve(client);
+      }
+    });
+  })
+}
+
+async function openConnection(client) {
+  if (!client) {
+    return new Error('client was not created');
+  }
+
+  return await new Promise((resolve, reject) => {
+    client.open((err) => {
+      if (err) {
+        logger.error(`Cannot open connection: ${err.message}`);
+        return reject(new Error(err.toString()));
+      } else {
+        logger.info('Client connected');
         return resolve();
       }
     });
@@ -30,21 +47,11 @@ function printInput(inputName, msg) {
 }
 
 async function initModule() {
-  const connectionString = process.env.EdgeHubConnectionString;
-  const caFilePath = process.env.EdgeModuleCACertificateFile;
-  if (!connectionString || !caFilePath) {
-    throw new Error('cannot get connectionstring or module CA Certificate File for test module');
-  }
-  const caContent = await fse.readFile(caFilePath);
-  client = Client.fromConnectionString(connectionString, Mqtt);
+  client = await createClient();
   client.on('error', (err) => {
     logger.error(err.message);
   });
-  await setOptions({
-    ca: caContent
-  });
-  logger.info('Client connected');
-
+  await openConnection(client);
   client.on('inputMessage', (inputName, msg) => {
     client.complete(msg, (err) => {
       if (err) {
