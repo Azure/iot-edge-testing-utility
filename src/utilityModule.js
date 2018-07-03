@@ -73,7 +73,7 @@ async function sendOutputEvent(channel, message) {
         logger.error(`Send message fail: ${err.message}`);
         return reject(new Error(err.toString()));
       } else {
-        logger.info('Send message successfullly');
+        logger.info('Send message successfully');
         return resolve();
       }
     });
