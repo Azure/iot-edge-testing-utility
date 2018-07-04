@@ -1,4 +1,4 @@
-FROM node:8-slim
+FROM arm32v7/node:8-slim
 
 WORKDIR /app/
 
