@@ -2,7 +2,7 @@
   "$schema-version": "0.0.1",
   "description": "",
   "image": {
-      "repository": "adashen/iot-edge-testing-utility",
+      "repository": "iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility",
       "tag": {
           "version": "0.0.1",
           "platforms": {

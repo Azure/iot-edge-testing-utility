@@ -1,6 +1,6 @@
 {
   "name": "iot-edge-testing-utility",
-  "version": "0.0.1",
+  "version": "1.0.0-rc",
   "description": "Testing utility for Azure IoT Edge Modules",
   "main": "server.js",
   "scripts": {
