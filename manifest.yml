@@ -1,18 +1,18 @@
-image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc
-tags: [1.0.0-rc-amd64, 1.0.0-rc-windows-amd64, 1.0.0-rc-arm32v7]
+image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc1
+tags: [1.0.0-rc1-amd64, 1.0.0-rc1-windows-amd64, 1.0.0-rc1-arm32v7]
 manifests:
   -
-    image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc-amd64
+    image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc1-amd64
     platform:
       architecture: amd64
       os: linux
   -
-    image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc-windows-amd64
+    image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc1-windows-amd64
     platform:
       architecture: amd64
       os: windows
   -
-    image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc-arm32v7
+    image: iotedgetooling.azurecr.io/internal/azureiotedge-testing-utility:1.0.0-rc1-arm32v7
     platform:
       architecture: arm
       os: linux
