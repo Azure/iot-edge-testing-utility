@@ -18,7 +18,7 @@ async function createClient() {
         return resolve(client);
       }
     });
-  })
+  });
 }
 
 async function openConnection(client) {

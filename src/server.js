@@ -58,8 +58,9 @@ async function startServer() {
 }
 
 process.on('unhandledRejection', (err) => {
+  logger.error(`Error: ${err.message}`);
   process.exit(1);
-})
+});
 
 startServer();
 module.exports = server;
