@@ -1,5 +1,4 @@
 image: aziotedgetooling.azurecr.io/public/azureiotedge-testing-utility:1.0.0
-tags: [1.0.0-amd64, 1.0.0-windows-amd64, 1.0.0-arm32v7]
 manifests:
   -
     image: aziotedgetooling.azurecr.io/public/azureiotedge-testing-utility:1.0.0-amd64
