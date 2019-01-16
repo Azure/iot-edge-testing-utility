@@ -1,4 +1,4 @@
-FROM stefanscherer/node-windows:8-nanoserver
+FROM stefanscherer/node-windows:10-nanoserver
 
 WORKDIR /app/
 
