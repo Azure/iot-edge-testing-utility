@@ -15,3 +15,8 @@ manifests:
     platform:
       architecture: arm
       os: linux
+  -
+    image: aziotedgetooling.azurecr.io/public/azureiotedge-testing-utility:1.0.0-arm64v8
+    platform:
+      architecture: arm64
+      os: linux

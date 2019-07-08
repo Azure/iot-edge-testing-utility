@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/Azure/iot-edge-testing-utility#readme",
   "dependencies": {
-    "azure-iot-device": "1.7.0",
-    "azure-iot-device-mqtt": "1.7.0",
+    "azure-iot-device": "^1.9.9",
+    "azure-iot-device-mqtt": "^1.9.9",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "fs-extra": "^5.0.0",
