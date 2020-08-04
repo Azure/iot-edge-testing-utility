@@ -95,7 +95,7 @@ function getValidateMessage(requestBody) {
     throw new Error('Cannot find message data in request body');
   }
 
-  const message = new Message(data);
+  const message = new Message(JSON.stringify(data));
   if(requestBody.properties && typeof requestBody.properties === 'object') {
     const properties = requestBody.properties;
     for(const property in properties) {

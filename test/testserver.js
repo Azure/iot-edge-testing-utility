@@ -35,7 +35,7 @@ describe('server', () => {
         .end((err, res) => {
           assert(stub.calledOnce);
           assert.equal(stub.args[0][0], 'input1');
-          assert.equal(stub.args[0][1]['data'], 'Hello World');
+          assert.equal(stub.args[0][1]['data'], JSON.stringify('Hello World'));
           assert.equal(stub.args[0][1]['messageId'], '0');
           assert.equal(stub.args[0][1]['correlationId'], '1');
           res.should.have.status(202);
