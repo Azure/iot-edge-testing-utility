@@ -95,7 +95,16 @@ function getValidateMessage(requestBody) {
     throw new Error('Cannot find message data in request body');
   }
 
-  const message = new Message(JSON.stringify(data));
+  const message = (() => 
+  {
+    try {
+      return new Message(JSON.stringify(data));
+    }
+    catch(error) {
+      throw new Error('Failed to parse the message JSON - please ensure that JSON is valid. Error: ' + error.message);
+    }
+  })();
+
   if(requestBody.properties && typeof requestBody.properties === 'object') {
     const properties = requestBody.properties;
     for(const property in properties) {
@@ -117,7 +126,7 @@ function getValidateMessage(requestBody) {
     message.userId = requestBody.userId;
   }
 
-  return {channel, message};
+  return {channel, message};  
 }
 
 async function sendMessage(requestBody) {
