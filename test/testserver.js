@@ -44,6 +44,32 @@ describe('server', () => {
         });
     });
 
+    it('it should invoke the sendOutputEvent when valid JSON message is passed', (done) => {
+      const stub = sinon.stub(utilityModule, 'sendOutputEvent').callsFake(() => {});
+      chai.request(server)
+        .post('/api/v1/messages')
+        .set('Content-Type', 'application/json')
+        .send({
+          'inputName': 'input1',
+          'data': [{'created_at':'2018-01-30 10:26:2 -0500','field1':'1.0','field2':'2.0'},{'created_at':'2018-02-02 11:27:27 -0500','field1':'1.1','field2':'2.2','status':'well done'}],
+          'properties': {
+            'test': true
+          },
+          'messageId': '0',
+          'correlationId': '1'
+        })
+        .end((err, res) => {
+          assert(stub.calledOnce);
+          assert.equal(stub.args[0][0], 'input1');
+          assert.equal(stub.args[0][1]['data'], JSON.stringify([{'created_at':'2018-01-30 10:26:2 -0500','field1':'1.0','field2':'2.0'},{'created_at':'2018-02-02 11:27:27 -0500','field1':'1.1','field2':'2.2','status':'well done'}]));
+          assert.equal(stub.args[0][1]['messageId'], '0');
+          assert.equal(stub.args[0][1]['correlationId'], '1');
+          res.should.have.status(202);
+          stub.restore();
+          done();
+        });
+    });
+
     it('it should show correct error if inputName is missing', (done) => {
       const stub = sinon.stub(utilityModule, 'sendOutputEvent').callsFake(() => {});
       chai.request(server)
