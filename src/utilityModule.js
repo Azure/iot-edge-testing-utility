@@ -95,34 +95,38 @@ function getValidateMessage(requestBody) {
     throw new Error('Cannot find message data in request body');
   }
 
-  try {
-    const message = new Message(JSON.stringify(data));
-    if(requestBody.properties && typeof requestBody.properties === 'object') {
-      const properties = requestBody.properties;
-      for(const property in properties) {
-        if (properties.hasOwnProperty(property)) {
-          message.properties.add(property, properties[property]);
-        }
+  const message = (() => 
+  {
+    try {
+      return new Message(JSON.stringify(data));
+    }
+    catch(error) {
+      throw new Error('Failed to parse the message JSON - please ensure that JSON is valid. Error: ' + error.message);
+    }
+  })();
+
+  if(requestBody.properties && typeof requestBody.properties === 'object') {
+    const properties = requestBody.properties;
+    for(const property in properties) {
+      if (properties.hasOwnProperty(property)) {
+        message.properties.add(property, properties[property]);
       }
     }
-
-    if (requestBody.messageId) {
-      message.messageId = requestBody.messageId;
-    }
-
-    if (requestBody.correlationId) {
-      message.correlationId = requestBody.correlationId;
-    }
-
-    if (requestBody.userId) {
-      message.userId = requestBody.userId;
-    }
-
-    return {channel, message};
   }
-  catch(error) {
-    throw new Error('Failed to parse the message JSON - please ensure that JSON is valid. Error: ' + error.message);
+
+  if (requestBody.messageId) {
+    message.messageId = requestBody.messageId;
   }
+
+  if (requestBody.correlationId) {
+    message.correlationId = requestBody.correlationId;
+  }
+
+  if (requestBody.userId) {
+    message.userId = requestBody.userId;
+  }
+
+  return {channel, message};  
 }
 
 async function sendMessage(requestBody) {
